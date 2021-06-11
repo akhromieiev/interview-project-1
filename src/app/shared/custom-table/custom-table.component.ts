@@ -1,7 +1,8 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SortEvent } from '../directives/sort.directive';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { GenericIdentityFn } from '../interfaces/generic-identity';
+import { SortEvent } from '../interfaces/sort';
 @Component({
   selector: 'app-custom-table',
   template: `
@@ -29,7 +30,6 @@ export class CustomTableComponent<T extends GenericIdentityFn<T>> {
   @Output() sortEvent = new EventEmitter();
   @Output() columnDrop = new EventEmitter();
 
-// private defaultSortOrder = ''
   onSortChange($event: SortEvent): void {
     if (this.columns.includes($event.column) && this.data) {
       this.sortEvent.emit($event);

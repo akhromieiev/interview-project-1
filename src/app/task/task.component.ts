@@ -1,6 +1,7 @@
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { SortEvent } from '../shared/directives/sort.directive';
+import { SortEvent } from '../shared/interfaces/sort';
+import { compare } from '../shared/utils/sort-helper';
 import { Task } from './store/models/task.model';
 
 @Component({
@@ -41,11 +42,7 @@ export class TaskComponent implements OnInit{
 
   sortTasks(event: SortEvent): void {
     this.tasks = this.tasks.slice().sort((a, b) => {
-      return this.compare(a, b, event.direction === 'asc', event.column)
+      return compare(a, b, event.direction === 'asc', event.column)
     })
-  }
-
-  private compare(a: Task, b: Task, isAsc: boolean, property: string) {
-    return (a[property] < b[property] ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }
