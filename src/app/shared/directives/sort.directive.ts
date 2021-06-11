@@ -12,7 +12,7 @@ export interface SortEvent {
 })
 export class SortDirective {
   @Input() appSortTh: string = '';
-  @Input() appSortThDir: SortDirection = '';
+  @Input() appSortThDir: SortDirection = 'asc';
   @Output() change: EventEmitter<any> = new EventEmitter()
   @HostListener('click', ['$event.target'])
   sortChange(): void {

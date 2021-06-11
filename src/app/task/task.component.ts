@@ -1,5 +1,5 @@
 import { moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { SortEvent } from '../shared/directives/sort.directive';
 import { Task } from './store/models/task.model';
 
@@ -19,20 +19,29 @@ import { Task } from './store/models/task.model';
   styleUrls: ['./task.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit{
   @Input() tasks: Task[] = []
   searchText: string = '';
   columns: string[] = ['id', 'text', 'date'];
 
-  constructor() {}
+  constructor() { }
+
+  ngOnInit(): void{
+    //default sorting by field
+    this.sortTasks({direction: 'asc', column: this.columns[0]})
+  }
 
   onColumnDrop($event: any): void {
     moveItemInArray(this.columns, $event.previousIndex, $event.currentIndex);
   }
 
   onSortEvent($event: SortEvent): void {
+    this.sortTasks($event);
+  }
+
+  sortTasks(event: SortEvent): void {
     this.tasks = this.tasks.slice().sort((a, b) => {
-      return this.compare(a, b, $event.direction === 'asc', $event.column)
+      return this.compare(a, b, event.direction === 'asc', event.column)
     })
   }
 
