@@ -10,7 +10,7 @@ import { SortEvent } from '../interfaces/sort';
     <tr cdkDropList 
         cdkDropListOrientation="horizontal" 
         (cdkDropListDropped)="onDrop($event)">
-      <th *ngFor="let column of columns;" 
+      <th *ngFor="let column of columns" 
           appSortTh="{{column}}" 
           (change)="onSortChange($event)" 
           cdkDrag>{{column}}</th>
