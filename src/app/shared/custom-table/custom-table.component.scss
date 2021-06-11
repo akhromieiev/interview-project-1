@@ -1,0 +1,38 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+tr th {
+  cursor: pointer;
+}
+
+// .div-table {
+//   display: table;         
+//   width: auto;         
+//   background-color: #eee;         
+//   border: 1px solid #666666;         
+//   border-spacing: 5px; /* cellspacing:poor IE support for  this */
+// }
+// .div-table-row {
+//   display: table-row;
+//   width: auto;
+//   clear: both;
+// }
+// .div-table-col {
+//   float: left; /* fix for  buggy browsers */
+//   display: table-column;         
+//   width: 200px;         
+//   background-color: #ccc;  
+// }
