@@ -10,12 +10,12 @@ import { SortEvent } from '../interfaces/sort';
     <tr cdkDropList 
         cdkDropListOrientation="horizontal" 
         (cdkDropListDropped)="onDrop($event)">
-      <th *ngFor="let column of columns" 
+      <th *ngFor="let column of columns;" 
           appSortTh="{{column}}" 
           (change)="onSortChange($event)" 
           cdkDrag>{{column}}</th>
     </tr>
-    <tr *ngFor="let row of data | search:searchText">
+    <tr *ngFor="let row of data | search:searchText; trackBy: trackRow">
       <td *ngFor="let column of columns">{{row[column]}}</td>
     </tr>
     </table>
@@ -40,4 +40,7 @@ export class CustomTableComponent<T extends GenericIdentityFn<T>> {
     this.columnDrop.emit($event);
   }
 
+  trackRow(_: number, item: any): any{
+    return item ? item.id : null;
+  }
 }
